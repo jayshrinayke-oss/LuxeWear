@@ -556,3 +556,144 @@ input:focus-visible {
     font-size: 36px;
   }
 }
+
+.product-section {
+  padding: 55px 5%;
+  overflow: hidden;
+}
+
+.product-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.product-section-heading h2 {
+  font-size: 30px;
+  margin-top: 8px;
+}
+
+.view-all {
+  color: #222;
+  text-decoration: none;
+  border-bottom: 1px solid #222;
+  padding-bottom: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.product-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  scroll-behavior: smooth;
+}
+
+.home-product-card {
+  flex: 0 0 220px;
+  color: #222;
+  text-decoration: none;
+}
+
+.home-product-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  background: #f5f3ef;
+}
+
+.home-product-card h3 {
+  font-size: 15px;
+  margin: 12px 0 6px;
+}
+
+.home-product-card p {
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .product-section {
+    padding: 35px 5%;
+  }
+
+  .home-product-card {
+    flex-basis: 165px;
+  }
+
+  .home-product-card img {
+    height: 210px;
+  }
+
+  .product-section-heading h2 {
+    font-size: 23px;
+  }
+}
+/* FOOTER */
+.site-footer {
+  background: #171717;
+  color: #fff;
+  padding: 60px 6% 25px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 35px;
+  padding-bottom: 40px;
+}
+
+.footer-content h2 {
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.footer-content h3 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.footer-content p {
+  color: #bbb;
+  font-size: 14px;
+}
+
+.footer-content a {
+  display: block;
+  color: #bbb;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 12px;
+  transition: color 0.3s;
+}
+
+.footer-content a:hover {
+  color: #fff;
+}
+
+.copyright {
+  border-top: 1px solid #444;
+  padding-top: 22px;
+  color: #aaa;
+  font-size: 13px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+.site-footer .footer-content h2 {
+  color: #ffffff;
+}

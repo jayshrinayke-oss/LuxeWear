@@ -10,6 +10,14 @@ import Wishlist from './pages/Wishlist'
 import products from './data/products.json'
 
 function Home() {
+  const sections = [
+    { title: "Men's Clothing", keywords: ['men', 'mens'] },
+    { title: "Women's Clothing", keywords: ['women', 'womens', 'female'] },
+    { title: 'Shoes', keywords: ['shoe', 'footwear'] },
+    { title: 'Accessories', keywords: ['accessor', 'bag', 'watch'] },
+    { title: 'Best Sellers', keywords: [] },
+  ]
+
   return (
     <main>
       <section className="hero">
@@ -40,19 +48,61 @@ function Home() {
       <section className="intro" id="about">
         <p>LESS, BUT BETTER.</p>
         <h2>Elevate Your Everyday.</h2>
-        <span>
-          Thoughtfully curated fashion for every moment.
-        </span>
+        <span>Thoughtfully curated fashion for every moment.</span>
       </section>
 
-      <section className="shop-section">
-        <p className="eyebrow">CURATED FOR YOU</p>
-        <h2>Explore Our Collection</h2>
-        <p>Clothing, footwear and accessories — all in style.</p>
-        <Link to="/shop" className="shop-button">
-          VIEW ALL PRODUCTS ↗
-        </Link>
-      </section>
+      {sections.map((section, index) => {
+        const sectionProducts = section.keywords.length === 0
+          ? products.slice(0, 8)
+          : products.filter(product =>
+              section.keywords.some(keyword =>
+                product.category.toLowerCase().includes(keyword)
+              )
+            ).slice(0, 8)
+
+        if (sectionProducts.length === 0) return null
+
+        return (
+         <section
+  className="product-section"
+  id={section.title === 'Best Sellers' ? 'best-sellers' : undefined}
+  key={section.title}
+>
+            <div className="product-section-heading">
+              <div>
+                <p className="eyebrow">
+                  {index === 4 ? 'CUSTOMER FAVOURITES' : 'EXPLORE THE COLLECTION'}
+                </p>
+                <h2>{section.title}</h2>
+              </div>
+
+              <Link to="/shop" className="view-all">
+                VIEW ALL ↗
+              </Link>
+            </div>
+
+            <div className="product-carousel">
+              {sectionProducts.map(product => (
+                <Link
+                  to={`/product/${product.id}`}
+                  className="home-product-card"
+                  key={product.id}
+                >
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>
+                    ₹{(product.discountPrice || product.price)
+                      .toLocaleString('en-IN')}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )
+      })}
     </main>
   )
 }
@@ -124,10 +174,12 @@ useEffect(() => {
         </Link>
 
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
-          <a href="/#about">About</a>
-        </nav>
+  <Link to="/">Home</Link>
+  <Link to="/shop">Products</Link>
+  <a href="/#best-sellers">Best Sellers</a>
+  <a href="/#about">About</a>
+  <a href="/#contact">Contact</a>
+</nav>
 
         <div className="nav-icons">
           <button
@@ -289,11 +341,39 @@ useEffect(() => {
         />
       </Routes>
 
-      <footer id="contact">
-        <h2>LUXEWEAR.</h2>
-        <p>Timeless style. Modern living.</p>
-        <p>© 2026 LuxeWear. All rights reserved.</p>
-      </footer>
+      <footer id="contact" className="site-footer">
+  <div className="footer-content">
+    <div>
+      <h2>LUXEWEAR.</h2>
+      <p>Timeless style. Modern living.</p>
+    </div>
+
+    <div>
+      <h3>SHOP</h3>
+      <Link to="/shop">All Products</Link>
+      <Link to="/shop">Men's Collection</Link>
+      <Link to="/shop">Women's Collection</Link>
+      <Link to="/shop">Accessories</Link>
+    </div>
+
+    <div>
+      <h3>QUICK LINKS</h3>
+      <Link to="/">Home</Link>
+      <a href="/#about">About Us</a>
+      <a href="/#best-sellers">Best Sellers</a>
+      <Link to="/wishlist">Wishlist</Link>
+      <Link to="/cart">Shopping Cart</Link>
+    </div>
+
+    <div>
+      <h3>HELP</h3>
+      <a href="mailto:support@luxewear.com">Contact Us</a>
+      <a href="/#contact">Customer Support</a>
+    </div>
+  </div>
+
+  <p className="copyright">© 2026 LuxeWear. All rights reserved.</p>
+</footer>
     </div>
   )
 }
